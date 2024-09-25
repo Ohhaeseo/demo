@@ -124,3 +124,17 @@
     
 })(jQuery);
 
+
+function confirmClose() {
+    // 사용자에게 창을 닫을 것인지 확인하는 메시지
+    const userConfirmed = confirm("현재 창을 닫으시겠습니까?");
+    
+    // 사용자가 확인 버튼을 클릭하면 창을 닫음
+    if (userConfirmed) {
+        window.close();
+    }
+}
+
+// 아래는 HTML에서 버튼과 연결하는 예시입니다.
+// <button onclick="confirmClose()">되돌아가기</button>
+

@@ -56,8 +56,16 @@ public class DemoController {
         model2.addAttribute("data6", "매우 좋습니다.");
         return "hello2";
     }
+
+    @GetMapping("/about_detailed")
+    public String about() {
+    return "about_detailed";
+    }
+
     
 }
+
+
 
 // @Controller
 // public class DemoController {
