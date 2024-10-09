@@ -17,4 +17,14 @@ public class BlogService {
     public List<Article> findAll() { // 게시판전체목록조회
         return blogRepository.findAll();
     }
+
+    public Article save(AddArticleRequest request){
+        // DTO가없는경우이곳에직접구현가능
+       // public ResponseEntity<Article> addArticle(@RequestParam String title, @RequestParam String content) {
+        // Article article = Article.builder()
+        // .title(title)
+        // .content(content)
+        // .build();
+        return blogRepository.save(request.toEntity());
+    }
 }
