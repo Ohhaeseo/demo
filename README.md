@@ -13,7 +13,9 @@
 추가 구현 : 상세 페이지 수정 완료!, confirmClose()함수 구현 및 추가 완료!
 
 ![4주차 추가구현]
-(https://github.com/user-attachments/assets/bdc575c3-9379-4e0b-85f9-2d55d58a16c7)
+<p align="center">
+  <img src="[이미지URL](https://github.com/user-attachments/assets/bdc575c3-9379-4e0b-85f9-2d55d58a16c7)">
+</p>
 
 **5주차 : Thymeleaf기본 문법확인, 데이터베이스 연동 및 구조변경**
 
