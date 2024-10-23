@@ -11,7 +11,7 @@
 **4주차 : 포트폴리오 작성하기 완료!**
 
 추가 구현 : 상세 페이지 수정 완료!, confirmClose()함수 구현 및 추가 완료!
-![블로그 게시판 화면](../demo/src/main/resources/static/img/homework4.png)
+![블로그 게시판 화면](......./img/homework4.png)
 
 
 **5주차 : Thymeleaf기본 문법확인, 데이터베이스 연동 및 구조변경**
