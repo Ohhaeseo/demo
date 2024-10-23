@@ -24,6 +24,8 @@
 
 추가구현 : 페이지 리다이렉트 완료!
 
+![homework6](https://github.com/user-attachments/assets/03b5fc01-81df-41ff-bb4e-1cf84df1f725)
+
 **7주차 : 6주차 이어서 구현 완료!**
 
 **8주차 :블로그 게시판 수정/삭제 구현 완료!**
