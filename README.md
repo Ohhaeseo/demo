@@ -18,6 +18,8 @@
 
 추가구현 : 사용자 추가 및 출력하기 완료!(insert 활용)
 
+![homework5](https://github.com/user-attachments/assets/1502f352-07f5-4c5c-930d-a036ac3bd77c)
+
 **6주차 : 프로필 수정하기, 블로그 게시판 조회 및 글쓰기 완료!**
 
 추가구현 : 페이지 리다이렉트 완료!
