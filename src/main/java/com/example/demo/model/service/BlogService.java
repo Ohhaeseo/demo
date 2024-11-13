@@ -24,6 +24,10 @@ import com.example.demo.model.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 // Lombok의 어노테이션으로, final로 선언된 필드를 매개변수로 받는 생성자를 자동으로 생성합니다.
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+
 @Service
 @RequiredArgsConstructor // 생성자 자동 생성(부분)
 // @Service는 이 클래스가 서비스 계층임을 나타냅니다.
@@ -134,11 +138,25 @@ public class BlogService {
         // .title(title)
         // .content(content)
         // .build();
+
+        // 기본값 체크 및 초기화
+        if (request.getCount() == null) request.setCount("0");
+        if (request.getLikec() == null) request.setLikec("0");
         
         return blogRepository.save(request.toEntity());
         // request 객체의 toEntity() 메서드를 호출해 AddArticleRequest DTO를 Article 엔티티로 변환한 후, 이를 blogRepository의 save 메서드로 저장합니다.
         // 저장된 Article 엔티티를 반환합니다.
     }
+
+    public Page<Board> findAll(Pageable pageable) 
+    {
+        return blogRepository.findAll(pageable);
+    }
+    public Page<Board> searchByKeyword(String keyword, Pageable pageable) 
+    {
+        return blogRepository.findByTitleContainingIgnoreCase(keyword, pageable);
+    } // LIKE 검색 제공(대소문자 무시)
+    
     
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +25,10 @@ import com.example.demo.model.domain.Board;
 import com.example.demo.model.domain.Article;
 import com.example.demo.model.service.AddArticleRequest;
 import com.example.demo.model.service.BlogService;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 // 필요한 클래스와 인터페이스를 임포트: 
 // - List: 게시글 목록을 다루기 위한 Java 리스트 클래스
@@ -53,23 +59,23 @@ public class BlogController {
     // }
 
     // 게시글 목록을 가져오는 메서드
-    @GetMapping("/board_list")
-    public String board_list(Model model) {
-        // @GetMapping: HTTP GET 요청이 /article_list 경로로 들어오면 이 메서드가 호출됩니다.
-        // 게시글 목록을 가져와서 사용자에게 보여주는 역할을 합니다.
+    // @GetMapping("/board_list")
+    // public String board_list(Model model) {
+    //     // @GetMapping: HTTP GET 요청이 /article_list 경로로 들어오면 이 메서드가 호출됩니다.
+    //     // 게시글 목록을 가져와서 사용자에게 보여주는 역할을 합니다.
 
-        List<Board> list = blogService.findAll();  
-        // blogService.findAll(): 서비스 계층에서 모든 게시글을 가져옵니다.
-        // findAll() 메서드는 DB에서 모든 게시글을 조회해 List<Article> 형태로 반환합니다.
+    //     List<Board> list = blogService.findAll();  
+    //     // blogService.findAll(): 서비스 계층에서 모든 게시글을 가져옵니다.
+    //     // findAll() 메서드는 DB에서 모든 게시글을 조회해 List<Article> 형태로 반환합니다.
 
-        model.addAttribute("boards", list);  
-        // model.addAttribute(): 가져온 게시글 목록을 "articles"라는 이름으로 모델에 추가합니다.
-        // 이는 뷰(HTML 파일)에서 사용할 수 있도록 데이터를 전달하는 역할을 합니다.
+    //     model.addAttribute("boards", list);  
+    //     // model.addAttribute(): 가져온 게시글 목록을 "articles"라는 이름으로 모델에 추가합니다.
+    //     // 이는 뷰(HTML 파일)에서 사용할 수 있도록 데이터를 전달하는 역할을 합니다.
 
-        return "board_list";  
-        // "article_list"라는 이름의 Thymeleaf 템플릿을 반환합니다.
-        // 이 템플릿은 src/main/resources/templates/article_list.html 파일에 대응합니다.
-    }
+    //     return "board_list";  
+    //     // "article_list"라는 이름의 Thymeleaf 템플릿을 반환합니다.
+    //     // 이 템플릿은 src/main/resources/templates/article_list.html 파일에 대응합니다.
+    // }
 
     
 
@@ -237,6 +243,64 @@ public class BlogController {
     public String board_write() {
     return "board_write";
     }
+
+    @PostMapping("/api/boards") // 글쓰기 게시판 저장
+    public String addboards(@ModelAttribute AddArticleRequest request) {
+    blogService.save(request);
+    return "redirect:/board_list"; // .HTML 연결
+    }
+
+    // @GetMapping("/board_list") // 새로운 게시판 링크 지정
+    // public String board_list(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String keyword) {
+    // PageRequest pageable = PageRequest.of(page, 3); // 한 페이지의 게시글 수
+    // Page<Board> list; // Page를 반환
+
+    // if (keyword.isEmpty()) 
+    // {
+    //     list = blogService.findAll(pageable); // 기본 전체 출력(키워드 x)
+    // } 
+    // else 
+    // {
+    //     list = blogService.searchByKeyword(keyword, pageable); // 키워드로 검색
+    // }
+    // model.addAttribute("boards", list); // 모델에 추가
+    // model.addAttribute("totalPages", list.getTotalPages()); // 페이지 크기
+    // model.addAttribute("currentPage", page); // 페이지 번호
+    // model.addAttribute("keyword", keyword); // 키워드
+    //     return "board_list"; // .HTML 연결
+    // }
+
+    @DeleteMapping("/api/board_delete/{id}")
+    public String deleteBoard(@PathVariable Long id) {
+        // @DeleteMapping: HTTP DELETE 요청을 처리하여 게시글을 삭제합니다
+        // @PathVariable: URL의 id를 매개변수로 받습니다
+        
+        blogService.delete(id); // 해당 id의 게시글을 삭제합니다
+        return "redirect:/board_list"; // 삭제 완료 후 목록 페이지로 리다이렉트합니다
+    }
+
+    @GetMapping("/board_list") // 새로운 게시판 링크 지정
+    public String board_list(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "") String keyword) {
+        int pageSize = 3;  // 한 페이지에 표시할 게시글 수
+        PageRequest pageable = PageRequest.of(page, pageSize);
+        Page<Board> list; // Page를 반환
+
+        if (keyword.isEmpty()) {
+            list = blogService.findAll(pageable); // 기본 전체 출력(키워드 x)
+        } else {
+            list = blogService.searchByKeyword(keyword, pageable); // 키워드로 검색
+        }
+
+        int startNum = (page * pageSize) + 1; // 현재 페이지에서의 시작 글 번호
+        model.addAttribute("boards", list); // 모델에 게시글 목록 추가
+        model.addAttribute("totalPages", list.getTotalPages()); // 총 페이지 수
+        model.addAttribute("currentPage", page); // 현재 페이지 번호
+        model.addAttribute("keyword", keyword); // 키워드
+        model.addAttribute("startNum", startNum); // 시작 번호
+
+        return "board_list"; // 연결할 HTML 템플릿
+    }
+
 
 
     

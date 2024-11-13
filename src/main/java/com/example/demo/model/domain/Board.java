@@ -41,7 +41,8 @@ public class Board {
     private String newdate = "";
 
     @Column(name = "count", nullable = false)
-    private String count = "";
+    // private String count = "";
+    private String count = "0";
     
     @Column(name = "likec", nullable = false)
     private String likec = "";

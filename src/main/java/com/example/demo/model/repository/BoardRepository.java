@@ -14,6 +14,10 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.domain.Board;
 // 이 엔터티는 데이터베이스의 테이블과 매핑된 클래스입니다.
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+
 @Repository
 // @Repository 어노테이션: 이 인터페이스가 스프링 컨텍스트에서 
 // 데이터베이스에 접근하는 객체로 사용된다는 것을 나타냅니다.
@@ -26,8 +30,12 @@ import com.example.demo.model.domain.Board;
 // // 이 인터페이스는 스프링에 의해 자동으로 구현되며, 별도의 구현 없이 CRUD 작업을 사용할 수 있습니다.
 // }
 
+// public interface BoardRepository extends JpaRepository<Board, Long>{
+//     // List<Article> findAll();
+// }
+
 public interface BoardRepository extends JpaRepository<Board, Long>{
-    // List<Article> findAll();
+Page<Board> findByTitleContainingIgnoreCase(String title, Pageable pageable);
 }
     
 
