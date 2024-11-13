@@ -9,6 +9,8 @@ import lombok.*; // 어노테이션 자동 생성
 import com.example.demo.model.domain.Article;
 // AddArticleRequest 클래스에서 Article 엔티티를 사용하기 위해 Article 클래스를 임포트합니다.
 
+import com.example.demo.model.domain.Board;
+
 @NoArgsConstructor // 기본 생성자 추가
 // Lombok 어노테이션으로, 매개변수가 없는 기본 생성자를 자동으로 생성해 줍니다.
 
@@ -26,15 +28,23 @@ public class AddArticleRequest {
 
     private String content;
     // 게시글의 내용을 저장할 필드입니다.
+    private String user;
+    private String newdate;
+    private String count;
+    private String likec;
 
     // 불필요한 데이터 노출을 방지하기 위해 필요한 필드만 사용
-    public Article toEntity() {
+    public Board toEntity() {
     // 사용자가 입력한 title과 content를 바탕으로 Article 엔티티 객체를 생성하는 메서드입니다.
     // 엔티티 변환을 담당하는 역할을 합니다.
 
-        return Article.builder()  // Article 엔티티를 빌더 패턴을 사용해 생성합니다.
+        return Board.builder()  // Article 엔티티를 빌더 패턴을 사용해 생성합니다.
             .title(title)         // 이 요청 객체의 title 값을 Article의 title에 설정합니다.
             .content(content)     // 이 요청 객체의 content 값을 Article의 content에 설정합니다.
+            .user(user)
+            .newdate(newdate)
+            .count(count)
+            .likec(likec)
             .build();             // Article 객체를 생성합니다.
     }
 }

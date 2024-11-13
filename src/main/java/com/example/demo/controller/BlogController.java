@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.model.domain.Board;
 import com.example.demo.model.domain.Article;
 import com.example.demo.model.service.AddArticleRequest;
 import com.example.demo.model.service.BlogService;
@@ -44,7 +45,90 @@ public class BlogController {
     // @Autowired: Spring이 자동으로 BlogService 객체를 주입해줍니다.
     // blogService는 게시글과 관련된 비즈니스 로직을 처리하는 서비스입니다.
 
+    // @GetMapping("/board_list") // 새로운 게시판 링크 지정
+    // public String board_list(Model model) {
+    //     List<Board> list = blogService.findAll(); // 게시판 전체 리스트
+    //     model.addAttribute("boards", list); // 모델에 추가
+    //     return "board_list"; // .HTML 연결
+    // }
+
     // 게시글 목록을 가져오는 메서드
+    @GetMapping("/board_list")
+    public String board_list(Model model) {
+        // @GetMapping: HTTP GET 요청이 /article_list 경로로 들어오면 이 메서드가 호출됩니다.
+        // 게시글 목록을 가져와서 사용자에게 보여주는 역할을 합니다.
+
+        List<Board> list = blogService.findAll();  
+        // blogService.findAll(): 서비스 계층에서 모든 게시글을 가져옵니다.
+        // findAll() 메서드는 DB에서 모든 게시글을 조회해 List<Article> 형태로 반환합니다.
+
+        model.addAttribute("boards", list);  
+        // model.addAttribute(): 가져온 게시글 목록을 "articles"라는 이름으로 모델에 추가합니다.
+        // 이는 뷰(HTML 파일)에서 사용할 수 있도록 데이터를 전달하는 역할을 합니다.
+
+        return "board_list";  
+        // "article_list"라는 이름의 Thymeleaf 템플릿을 반환합니다.
+        // 이 템플릿은 src/main/resources/templates/article_list.html 파일에 대응합니다.
+    }
+
+    
+
+    @GetMapping("/board_view/{id}") // 게시판 링크 지정
+    public String board_view(Model model, @PathVariable Long id) {
+    Optional<Board> list = blogService.findById(id); // 선택한 게시판 글
+    if (list.isPresent()) 
+    {
+        model.addAttribute("boards", list.get()); // 존재할 경우 실제 Article 객체를 모델에 추가
+    } 
+    else 
+    {
+    // 처리할 로직 추가 (예: 오류 페이지로 리다이렉트, 예외 처리 등)
+        return "/error_page/article_error"; // 오류 처리 페이지로 연결
+    }
+        return "board_view"; // .HTML 연결
+    }
+
+    // @GetMapping("api/board_edit/{id}") // 게시판 링크 지정
+    // public String board_edit(Model model, @PathVariable Long id) {
+    // Optional<Board> list = blogService.findById(id); // 선택한 게시판 글
+    // if (list.isPresent()) 
+    // {
+    //     model.addAttribute("boards", list.get()); // 존재할 경우 실제 Article 객체를 모델에 추가
+    // } 
+    // else 
+    // {
+    // // 처리할 로직 추가 (예: 오류 페이지로 리다이렉트, 예외 처리 등)
+    //     return "/error_page/board_error"; // 오류 처리 페이지로 연결
+    // }
+    //     return "board_edit"; // .HTML 연결
+    // }
+
+     
+
+    // @PutMapping("/api/board_edit/{id}")
+    // public String updateArticle(@PathVariable Long id, @ModelAttribute AddArticleRequest request) 
+    // {
+    //     // @PutMapping: HTTP PUT 요청을 처리하여 게시글을 수정합니다
+    //     // @PathVariable: URL의 id를 매개변수로 받습니다
+    //     // @ModelAttribute: 폼 데이터를 AddArticleRequest 객체로 변환합니다
+        
+    //     blogService.update(id, request); // 게시글을 업데이트합니다
+    //     return "redirect:/board_list"; // 수정 완료 후 목록 페이지로 리다이렉트합니다
+    // }
+
+    @PutMapping("/api/board_edit/{id}")
+    public String updateBoard(@PathVariable Long id, @ModelAttribute AddArticleRequest request) 
+    {
+        // @PutMapping: HTTP PUT 요청을 처리하여 게시글을 수정합니다
+        // @PathVariable: URL의 id를 매개변수로 받습니다
+        // @ModelAttribute: 폼 데이터를 AddArticleRequest 객체로 변환합니다
+        
+        blogService.update(id, request); // 게시글을 업데이트합니다
+        return "redirect:/board_list"; // 수정 완료 후 목록 페이지로 리다이렉트합니다
+    }
+
+
+    /*// 게시글 목록을 가져오는 메서드
     @GetMapping("/article_list")
     public String article_list(Model model) {
         // @GetMapping: HTTP GET 요청이 /article_list 경로로 들어오면 이 메서드가 호출됩니다.
@@ -63,6 +147,8 @@ public class BlogController {
         // 이 템플릿은 src/main/resources/templates/article_list.html 파일에 대응합니다.
     }
 
+    
+
     // 게시글 추가 메서드
     @PostMapping("/api/articles")
     public String addArticle(@ModelAttribute AddArticleRequest request) {
@@ -80,34 +166,78 @@ public class BlogController {
     }
 
     
-    @GetMapping("/article_edit/{id}") // 게시판 링크 지정
-
+    @GetMapping("/article_edit/{id}") // URL 경로에서 게시글 ID를 변수로 받습니다
     public String article_edit(Model model, @PathVariable Long id) {
-        Optional<Article> list = blogService.findById(id); // 선택한 게시판 글
+        // @GetMapping: /article_edit/{id} 경로로 들어오는 GET 요청을 처리합니다
+        // @PathVariable: URL 경로의 {id} 부분을 Long 타입의 id 매개변수로 받습니다
+        
+        Optional<Article> list = blogService.findById(id); 
+        // blogService.findById(): 주어진 id로 게시글을 조회합니다
+        // Optional<Article>을 반환하여 게시글이 존재하지 않을 수 있음을 표현합니다
+        
         if (list.isPresent()) 
         {
-            model.addAttribute("article", list.get()); // 존재하면 Article 객체를 모델에 추가
+            model.addAttribute("article", list.get()); 
+            // 게시글이 존재하면 모델에 "article"이라는 이름으로 추가합니다
+            // list.get()으로 Optional에서 실제 Article 객체를 꺼냅니다
         } 
         else 
         {
-            // 처리할 로직 추가 (예: 오류 페이지로 리다이렉트, 예외 처리 등)
-            return "/error_page/article_error"; // 오류 처리 페이지로 연결(이름 수정됨)
+            return "/error_page/article_error"; 
+            // 게시글이 존재하지 않으면 에러 페이지로 이동합니다
         }
-        return "article_edit"; // .HTML 연결
+        return "article_edit"; // article_edit.html 템플릿을 렌더링합니다
     }
 
     @PutMapping("/api/article_edit/{id}")
     public String updateArticle(@PathVariable Long id, @ModelAttribute AddArticleRequest request) 
     {
-        blogService.update(id, request);
-        return "redirect:/article_list"; // 글 수정 이후 .html 연결
+        // @PutMapping: HTTP PUT 요청을 처리하여 게시글을 수정합니다
+        // @PathVariable: URL의 id를 매개변수로 받습니다
+        // @ModelAttribute: 폼 데이터를 AddArticleRequest 객체로 변환합니다
+        
+        blogService.update(id, request); // 게시글을 업데이트합니다
+        return "redirect:/article_list"; // 수정 완료 후 목록 페이지로 리다이렉트합니다
     }
 
     @DeleteMapping("/api/article_delete/{id}")
     public String deleteArticle(@PathVariable Long id) {
-        blogService.delete(id);
-        return "redirect:/article_list";
+        // @DeleteMapping: HTTP DELETE 요청을 처리하여 게시글을 삭제합니다
+        // @PathVariable: URL의 id를 매개변수로 받습니다
+        
+        blogService.delete(id); // 해당 id의 게시글을 삭제합니다
+        return "redirect:/article_list"; // 삭제 완료 후 목록 페이지로 리다이렉트합니다
+    }*/
+
+    // 게시글 수정 화면으로 이동하는 매핑
+    @GetMapping("/board_edit/{id}")
+    public String board_edit(Model model, @PathVariable Long id) {
+        Optional<Board> board = blogService.findById(id);
+        if (board.isPresent()) {
+            model.addAttribute("board", board.get());
+            return "board_edit"; // 수정 페이지
+        } else {
+            return "/error_page/board_error"; // 오류 페이지로 연결
+        }
     }
+
+    // @PutMapping("/api/board_edit/{id}")
+    // public String updateBoard(@PathVariable Long id, @ModelAttribute AddArticleRequest request) 
+    // {
+    //     // @PutMapping: HTTP PUT 요청을 처리하여 게시글을 수정합니다
+    //     // @PathVariable: URL의 id를 매개변수로 받습니다
+    //     // @ModelAttribute: 폼 데이터를 AddArticleRequest 객체로 변환합니다
+        
+    //     blogService.update(id, request); // 게시글을 업데이트합니다
+    //     return "redirect:/board_list"; // 수정 완료 후 목록 페이지로 리다이렉트합니다
+    // }
+
+    //글쓰기 맵핑
+    @GetMapping("/board_write")
+    public String board_write() {
+    return "board_write";
+    }
+
 
     
 }
@@ -115,31 +245,3 @@ public class BlogController {
 
 
 
-
-
-
-// package com.example.demo.controller;
-
-// import java.util.List;  // 올바른 List 임포트
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Controller;
-// import org.springframework.ui.Model;
-// import org.springframework.web.bind.annotation.GetMapping;
-
-// import com.example.demo.model.domain.Article;
-// import com.example.demo.model.service.BlogService;
-
-// @Controller
-// public class BlogController {
-//     @Autowired
-//     BlogService blogService;  // 소문자로 변경
-
-//     @GetMapping("/article_list")
-//     public String article_list(Model model) {
-//         List<Article> list = blogService.findAll();  // blogService로 일관성 유지
-//         model.addAttribute("articles", list);
-//         return "article_list"; // .HTML 연결
-//     }
-
-    
-// }
