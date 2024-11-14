@@ -47,6 +47,7 @@
 ***추가구현 : 게시판 페이지 글 번호와 삭제 구현 완료!***
 
 ![homework11](https://github.com/user-attachments/assets/4835041e-620e-48e9-a723-4a8a77f40ecc)
+![homework11_1](https://github.com/user-attachments/assets/48525408-9d96-4101-8839-9143487bf6ac)
 
 
 
