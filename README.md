@@ -43,6 +43,7 @@
 ***추가구현 : 게시판 페이지 글 수정 기능 구현 완료!***
 
 ![homework10](https://github.com/user-attachments/assets/5a08d062-39c0-4782-9996-59214cd4e54e)
+![homework10_1](https://github.com/user-attachments/assets/b2eb09a3-728e-4e1a-bbd2-68ebc756e207)
 
 ### 11주차 : 게시판 글쓰기 및 검색창과 페이징 구현 완료!
 
