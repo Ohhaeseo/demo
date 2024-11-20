@@ -148,6 +148,26 @@ public class BlogService {
         // 저장된 Article 엔티티를 반환합니다.
     }
 
+    // public Article save(AddArticleRequest request){
+    //     // 게시글 저장 로직을 처리하는 메서드입니다.
+    //     // AddArticleRequest DTO를 받아 Article 엔티티로 변환 후 저장합니다.
+
+    //     // DTO가 없는 경우 이곳에 직접 구현 가능
+    //     // 아래는 DTO 없이 직접 파라미터로 title과 content를 받아 게시글을 생성하는 코드입니다.
+    //     // public ResponseEntity<Article> addArticle(@RequestParam String title, @RequestParam String content) {
+    //     // Article article = Article.builder()
+    //     // .title(title)
+    //     // .content(content)
+    //     // .build();
+        
+    //     return blogRepository.save(request.toEntity());
+    //     // request 객체의 toEntity() 메서드를 호출해 AddArticleRequest DTO를 Article 엔티티로 변환한 후, 이를 blogRepository의 save 메서드로 저장합니다.
+    //     // 저장된 Article 엔티티를 반환합니다.
+    // }
+
+    
+
+
     public Page<Board> findAll(Pageable pageable) 
     {
         return blogRepository.findAll(pageable);
