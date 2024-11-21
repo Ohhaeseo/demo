@@ -54,7 +54,10 @@
 
 ### 12주차 : 로그인과 로그아웃 구현 완료!
 
-***추가구현 :***
+***추가구현 : 입력값 필터링 기능 구현 완료!***
+
+![homework12](https://github.com/user-attachments/assets/0dfc75bd-a57e-454c-a1ff-ff69a337d5bf)
+
 
 
 
