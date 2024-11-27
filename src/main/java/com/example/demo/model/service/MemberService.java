@@ -3,12 +3,17 @@ package com.example.demo.model.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
+
 import com.example.demo.model.domain.Member;
 import com.example.demo.model.repository.MemberRepository;
 import com.example.demo.model.service.AddMemberRequest;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@Validated
 @RequiredArgsConstructor
 @Transactional // 클래스 내 모든 메서드에 트랜잭션 적용
 public class MemberService {
@@ -17,7 +22,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder; // 비밀번호 암호화
 
     // 회원 저장 메서드
-    public Member saveMember(AddMemberRequest request) {
+    public Member saveMember(@Valid AddMemberRequest request) {
         validateDuplicateMember(request); // 이메일 중복 체크
         String encodedPassword = passwordEncoder.encode(request.getPassword());
         request.setPassword(encodedPassword); // 암호화된 비밀번호 설정

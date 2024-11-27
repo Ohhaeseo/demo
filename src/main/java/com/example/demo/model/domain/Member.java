@@ -1,53 +1,57 @@
 package com.example.demo.model.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import lombok.Builder;
-
 // 패키지 선언: 이 클래스가 속한 패키지를 정의합니다.
 // com.example.demo.model.domain 패키지에 속한 클래스임을 나타냅니다.
 
 import lombok.*; // Lombok 라이브러리의 모든 어노테이션을 자동으로 가져옵니다.
 import jakarta.persistence.*; // JPA 관련 어노테이션을 위한 패키지. (javax의 후속 버전입니다.)
+import jakarta.validation.constraints.*;
 
-@Getter // Lombok 어노테이션으로, 모든 필드에 대한 getter 메서드를 자동 생성합니다.
-// setter는 제공하지 않아서 무분별한 필드 변경을 방지합니다.
-
-@Entity // JPA 어노테이션으로, 이 클래스가 DB 테이블과 매핑된 엔티티 클래스임을 나타냅니다.
-@Table(name = "member") // 이 엔티티가 매핑될 테이블의 이름을 "article"로 지정합니다.
-// 만약 이 어노테이션이 없으면 클래스 이름을 테이블 이름으로 사용하게 됩니다.
-
-@NoArgsConstructor(access = AccessLevel.PROTECTED) 
-// Lombok 어노테이션으로, 매개변수가 없는 기본 생성자를 자동 생성합니다.
-// AccessLevel.PROTECTED는 외부에서 이 생성자를 호출하지 못하게 보호 수준을 설정하여 무분별한 객체 생성을 방지합니다.
-
+@Getter
+@Entity
+@Table(name = "member")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 1씩 증가
-    @Column(name = "id", updatable = false) // 수정 x
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false)
     private Long id;
-    @Column(name = "name", nullable = false) // null x
+
+    @NotBlank(message = "이름은 공백일 수 없습니다.")
+    @Pattern(regexp = "^[a-zA-Z가-힣]*$", message = "이름은 특수문자를 포함할 수 없습니다.")
+    @Column(name = "name", nullable = false)
     private String name = "";
-    @Column(name = "email", unique = true, nullable = false) // unique 중복 x
+
+    @NotBlank(message = "이메일은 공백일 수 없습니다.")
+    @Email(message = "유효한 이메일 형식이 아닙니다.")
+    @Column(name = "email", unique = true, nullable = false)
     private String email = "";
+
+    @NotBlank(message = "비밀번호는 공백일 수 없습니다.")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z]).{8,}$", 
+            message = "비밀번호는 8자 이상이며, 대문자와 소문자를 모두 포함해야 합니다.")
     @Column(name = "password", nullable = false)
     private String password = "";
+
+    @NotNull(message = "나이를 입력해주세요.")
+    @Min(value = 19, message = "19세 이상만 가입 가능합니다.")
+    @Max(value = 99, message = "99세 이하만 가입 가능합니다.")
     @Column(name = "age", nullable = false)
-    private String age = "";
-    @Column(name = "mobile", nullable = false)
+    private Integer age;
+
+    @Column(name = "mobile")
     private String mobile = "";
-    @Column(name = "address", nullable = false)
+
+    @Column(name = "address")
     private String address = "";
 
-    @Builder // 생성자에 빌더 패턴 적용(불변성)
-    public Member(String name, String email, String password, String age, String mobile, String address)
-    {
+    @Builder
+    public Member(String name, String email, String password, Integer age, String mobile, String address) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.age = age;
         this.mobile = mobile;
         this.address = address;
-    } 
-}   
+    }
+}
