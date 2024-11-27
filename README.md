@@ -40,7 +40,10 @@
 
 ### 10주차 : 게시판 수정 및 추가 기능 구현 완료!
 
-***추가구현 : 게시판 페이지 글 수정 미완!***
+***추가구현 : 게시판 페이지 글 수정 기능 구현 완료!***
+
+![homework10](https://github.com/user-attachments/assets/5a08d062-39c0-4782-9996-59214cd4e54e)
+![homework10_1](https://github.com/user-attachments/assets/b2eb09a3-728e-4e1a-bbd2-68ebc756e207)
 
 ### 11주차 : 게시판 글쓰기 및 검색창과 페이징 구현 완료!
 
@@ -48,6 +51,13 @@
 
 ![homework11](https://github.com/user-attachments/assets/4835041e-620e-48e9-a723-4a8a77f40ecc)
 ![homework11_1](https://github.com/user-attachments/assets/48525408-9d96-4101-8839-9143487bf6ac)
+
+### 12주차 : 로그인과 로그아웃 구현 완료!
+
+***추가구현 : 입력값 필터링 기능 구현 완료!***
+
+![homework12](https://github.com/user-attachments/assets/0dfc75bd-a57e-454c-a1ff-ff69a337d5bf)
+
 
 
 
