@@ -58,6 +58,10 @@
 
 ![homework12](https://github.com/user-attachments/assets/0dfc75bd-a57e-454c-a1ff-ff69a337d5bf)
 
+### 13주차 : 로그인과 로그아웃-2 및 세션 유지/검사 구현 완료!
+
+***추가구현 :***
+
 
 
 
