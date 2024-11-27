@@ -62,6 +62,8 @@
 
 ***추가구현 :현재 로그인한 사용자로 작성자를 저장한다. / 글의 작성자만 수정/삭제 버튼을 보여준다. --> 구현완료!***
 
+![board](https://github.com/user-attachments/assets/bc99f3c8-2dcc-4fe3-a23b-ac7562531081)
+
 
 
 
