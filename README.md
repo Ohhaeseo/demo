@@ -58,6 +58,15 @@
 
 ![homework12](https://github.com/user-attachments/assets/0dfc75bd-a57e-454c-a1ff-ff69a337d5bf)
 
+### 13주차 : 로그인과 로그아웃-2 및 세션 유지/검사 구현 완료!
+
+***추가구현 :현재 로그인한 사용자로 작성자를 저장한다. / 글의 작성자만 수정/삭제 버튼을 보여준다. --> 구현완료!***
+
+![board](https://github.com/user-attachments/assets/bc99f3c8-2dcc-4fe3-a23b-ac7562531081)
+
+
+
+
 
 
 
