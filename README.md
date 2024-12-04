@@ -64,6 +64,10 @@
 
 ![board](https://github.com/user-attachments/assets/bc99f3c8-2dcc-4fe3-a23b-ac7562531081)
 
+### 14주차 : 메인 포트폴리오 완성! 프로필 수정 및 코드 체크!
+
+***추가구현 :***
+
 
 
 
