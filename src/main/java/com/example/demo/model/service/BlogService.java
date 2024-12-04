@@ -168,14 +168,26 @@ public class BlogService {
     
 
 
+    // 페이징 처리된 게시글 목록을 조회하는 메서드입니다.
+    // @param pageable - 페이지 정보(페이지 번호, 페이지 크기 등)를 담고 있는 객체
+    // @return Page<Board> - 페이징 처리된 게시글 목록을 반환
     public Page<Board> findAll(Pageable pageable) 
     {
-        return blogRepository.findAll(pageable);
+        return blogRepository.findAll(pageable); // JpaRepository에서 제공하는 페이징 메서드 사용
     }
+
+    // 키워드로 게시글을 검색하고 페이징 처리하는 메서드입니다.
+    // @param keyword - 검색할 키워드 문자열
+    // @param pageable - 페이지 정보(페이지 번호, 페이지 크기 등)를 담고 있는 객체
+    // @return Page<Board> - 검색 결과를 페이징 처리하여 반환
     public Page<Board> searchByKeyword(String keyword, Pageable pageable) 
     {
+        // findByTitleContainingIgnoreCase: 
+        // - Title 필드에서 keyword를 포함하는 데이터를 검색
+        // - IgnoreCase: 대소문자를 구분하지 않음
+        // - Containing: SQL의 LIKE 검색과 동일 (%keyword%)
         return blogRepository.findByTitleContainingIgnoreCase(keyword, pageable);
-    } // LIKE 검색 제공(대소문자 무시)
+    }
     
     
 
