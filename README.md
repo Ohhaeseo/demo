@@ -64,6 +64,13 @@
 
 ![board](https://github.com/user-attachments/assets/bc99f3c8-2dcc-4fe3-a23b-ac7562531081)
 
+### 14주차 : 메인 포트폴리오 완성! 프로필 수정 및 코드 체크!
+
+***추가구현 :2명이상 로그인 되도록 코드 수정 구현 실패! / 동일 파일 업로드 시에 다른 이름으로 업로드되고 오류 메세지가 뜨게끔 구현 완료!***
+
+![homeworkfinal](https://github.com/user-attachments/assets/ca3f1347-fa7f-4d96-8e91-8f451a87c56e)
+
+
 
 
 
