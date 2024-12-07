@@ -37,8 +37,8 @@ public class BlogController {
     @GetMapping("/board_list")
     public String board_list(Model model, @RequestParam(defaultValue = "0") int page, 
                            @RequestParam(defaultValue = "") String keyword, HttpSession session) {
-        String userId = (String) session.getAttribute("userId"); // 세션에서 사용자 ID 가져오기
         String email = (String) session.getAttribute("email"); // 세션에서 이메일 가져오기
+        String userId = (String) session.getAttribute("userId_" + email); // 사용자별 고유 세션 ID 가져오기
         if (userId == null) { // 로그인하지 않은 경우
             return "redirect:/member_login"; // 로그인 페이지로 리다이렉트
         }
@@ -82,7 +82,7 @@ public class BlogController {
         return "board_view"; // board_view 뷰 반환
     }
 
-    // 게시글 작성 페이지로 이동하는 메서드
+    //게시글 작성 페이지로 이동하는 메서드
     @GetMapping("/board_write")
     public String board_write(Model model, HttpSession session) {
         String email = (String) session.getAttribute("email"); // 세션에서 이메일 가져오기
@@ -92,6 +92,8 @@ public class BlogController {
         model.addAttribute("email", email);
         return "board_write"; // board_write 뷰 반환
     }
+
+
 
     // 새로운 게시글을 저장하는 메서드
     @PostMapping("/api/boards")

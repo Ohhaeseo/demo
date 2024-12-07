@@ -28,6 +28,8 @@ public class SecurityConfig { // 스프링에서 보안 관리 클래스
                                 .maximumSessions(1) // 사용자별세션최대수
                                 .maxSessionsPreventsLogin(true) // 동시세션제한
                 );
+
+                
         return http.build(); // 필터체인을통해보안설정(HttpSecurity)을반환
     }
 

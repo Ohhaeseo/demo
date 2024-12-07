@@ -1,20 +1,3 @@
-// package com.example.demo;
-
-// import org.springframework.stereotype.Controller;
-// import org.springframework.ui.Model;
-// import org.springframework.web.bind.annotation.GetMapping;
-
-// @Controller // 컨트롤러 어노테이션 명시
-// public class DemoController 
-// { 
-//     @GetMapping("/hello") // 전송 방식 GET
-//     public String hello(Model model) 
-//     {
-//         model.addAttribute("data", " 방갑습니다."); // model 설정
-//         return "hello"; // hello.html 연결
-//     }
-// }
-
 // 이 클래스가 속한 패키지를 선언합니다.
 package com.example.demo.controller;
 
@@ -101,24 +84,7 @@ public class DemoController {
         System.out.println("데이터 출력 디버그 : " + test2);
         return "testdb";
     }
-
-    // @GetMapping("/article_list")
-    // public String article_list() {
-    // return "article_list";
-    // }
-
     
 }
 
-
-
-// @Controller
-// public class DemoController {
-
-//     @GetMapping("/hello2")
-//     public String hello2(Model model) {
-//         model.addAttribute("data", "이것은 Hello2 페이지입니다.");
-//         return "hello2"; // hello2.html 파일을 반환
-//     }
-// }
 
