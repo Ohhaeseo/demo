@@ -52,21 +52,28 @@ public class Board {
     // 빌더 패턴은 객체 생성 시 가독성을 높이고, 필수 값과 선택 값을 분리해 유연하게 객체를 생성할 수 있습니다.
 
     public Board(String content, String title, String user, String newdate, String count, String likec) {
-        // 매개변수 두 개를 받는 생성자. 빌더 패턴이나 직접 호출로 이 생성자를 사용할 수 있습니다.
-        this.content = content;
-        this.title = title;
-        this.user = user;
-        this.newdate = newdate;
-        this.count = count;
-        this.likec = likec;
+        // 생성자: Board 객체를 생성할 때 초기값을 설정합니다.
+        // 매개변수로 전달된 값들을 필드에 할당하여 새로운 Board 객체를 초기화합니다.
+        
+        this.content = content; // 전달된 content 값을 현재 객체의 content 필드에 할당.
+        this.title = title;     // 전달된 title 값을 현재 객체의 title 필드에 할당.
+        this.user = user;       // 전달된 user 값을 현재 객체의 user 필드에 할당.
+        this.newdate = newdate; // 전달된 newdate 값을 현재 객체의 newdate 필드에 할당.
+        this.count = count;     // 전달된 count 값을 현재 객체의 count 필드에 할당.
+        this.likec = likec;     // 전달된 likec 값을 현재 객체의 likec 필드에 할당.
     }
+    
 
-    public void update(String content, String title, String user, String newdate, String count, String likec) { // 현재 객체 상태 업데이트
-        this.content = content;
-        this.title = title;
-        this.user = user;
-        this.newdate = newdate;
-        this.count = count;
-        this.likec = likec;
+    public void update(String content, String title, String user, String newdate, String count, String likec) {
+        // update 메서드: 기존 Board 객체의 필드 값을 새 값으로 업데이트합니다.
+        // 객체의 상태를 수정하기 위해 사용됩니다.
+        
+        this.content = content; // 전달된 content 값으로 현재 객체의 content 필드 값을 변경.
+        this.title = title;     // 전달된 title 값으로 현재 객체의 title 필드 값을 변경.
+        this.user = user;       // 전달된 user 값으로 현재 객체의 user 필드 값을 변경.
+        this.newdate = newdate; // 전달된 newdate 값으로 현재 객체의 newdate 필드 값을 변경.
+        this.count = count;     // 전달된 count 값으로 현재 객체의 count 필드 값을 변경.
+        this.likec = likec;     // 전달된 likec 값으로 현재 객체의 likec 필드 값을 변경.
     }
+    
 }

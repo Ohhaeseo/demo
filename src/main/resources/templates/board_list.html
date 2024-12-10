@@ -13,14 +13,19 @@
         <div class="d-flex justify-content-between align-items-center mt-4 p-3 border rounded bg-light">
             <h1 class="m-0">블로그 게시판(new)</h1>
             <div class="text-right">
+                <!-- 로그인한 사용자 email 표시 -->
                 <span class="font-weight-bold text-primary" th:text="${email} + '님 환영합니다.'"></span>
-                <a class="btn btn-sm btn-outline-danger ml-3" th:href="@{/api/logout}">로그아웃</a>
+                <!-- 로그아웃 링크에 sessionId 포함 -->
+                <a class="btn btn-sm btn-outline-danger ml-3" 
+                   th:href="@{/api/logout(sessionId=${sessionId})}">로그아웃</a>
             </div>
         </div>
 
         <form th:action="@{/board_list}" method="get" class="mt-4">
             <div class="input-group">
                 <input type="text" name="keyword" th:value="${keyword}" class="form-control" placeholder="검색어 입력...">
+                <!-- 세션 유지: hidden input으로 sessionId 전달 -->
+                <input type="hidden" name="sessionId" th:value="${sessionId}" />
                 <button type="submit" class="btn btn-primary">검색</button>
             </div>
         </form>
@@ -45,7 +50,8 @@
                         <td th:text="${startNum + iter.index}"></td> <!-- 시작 번호에 인덱스 추가 -->
                         <td th:text="${board.id}"></td>
                         <td>
-                            <a th:href="@{/board_view/{id}(id=${board.id})}">
+                            <!-- 게시글 상세보기 링크에 sessionId 포함 -->
+                            <a th:href="@{/board_view/{id}(id=${board.id}, sessionId=${sessionId})}">
                                 <span th:text="${board.title}"></span>
                             </a>
                         </td>
@@ -62,8 +68,8 @@
                 <tbody>
                     <tr>
                         <td>
-                            <!-- 글쓰기 버튼 -->
-                            <a class="btn btn-warning" th:href="@{/board_write}">글쓰기</a>
+                            <!-- 글쓰기 버튼에 sessionId 포함 -->
+                            <a class="btn btn-warning" th:href="@{/board_write(sessionId=${sessionId})}">글쓰기</a>
                         </td>
                     </tr>
                 </tbody>
@@ -75,16 +81,16 @@
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
         <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
-            <a class="page-link" th:href="@{/board_list(page=${currentPage - 1}, keyword=${keyword})}" aria-label="Previous">
+            <a class="page-link" th:href="@{/board_list(page=${currentPage - 1}, keyword=${keyword}, sessionId=${sessionId})}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
             th:classappend="${i == currentPage} ? 'active'">
-            <a class="page-link" th:href="@{/board_list(page=${i}, keyword=${keyword})}" th:text="${i + 1}">1</a>
+            <a class="page-link" th:href="@{/board_list(page=${i}, keyword=${keyword}, sessionId=${sessionId})}" th:text="${i + 1}">1</a>
         </li>
         <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
-            <a class="page-link" th:href="@{/board_list(page=${currentPage + 1}, keyword=${keyword})}" aria-label="Next">
+            <a class="page-link" th:href="@{/board_list(page=${currentPage + 1}, keyword=${keyword}, sessionId=${sessionId})}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

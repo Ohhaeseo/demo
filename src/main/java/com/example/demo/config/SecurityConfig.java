@@ -5,37 +5,47 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// BCryptPasswordEncoder 클래스를 가져옵니다. 비밀번호 암호화에 사용됩니다.
+
 import org.springframework.security.crypto.password.PasswordEncoder;
+// PasswordEncoder 인터페이스를 가져옵니다. 다양한 비밀번호 인코딩 방식을 정의할 수 있습니다.
+
 import org.springframework.security.web.SecurityFilterChain;
+// Spring Security에서 제공하는 SecurityFilterChain 클래스를 가져옵니다. 보안 필터 체인을 정의하는 데 사용됩니다.
 
-@Configuration // 스프링 설정 클래스 지정, 등록된 Bean 생성 시점
-@EnableWebSecurity // 스프링 보안 활성화
-public class SecurityConfig { // 스프링에서 보안 관리 클래스
+@Configuration // 스프링 설정 클래스를 나타냅니다. 이 클래스는 Bean을 정의하는 데 사용됩니다.
+@EnableWebSecurity // Spring Security를 활성화합니다. 보안 설정을 적용합니다.
+public class SecurityConfig { // 보안 설정을 관리하는 클래스입니다.
 
-    @Bean // 명시적 의존성 주입 : Autowired와 다름
-    // 5.7버전 이전 WebSecurityConfigurerAdapter 사용
+    @Bean // 이 메서드가 Spring Bean으로 등록됨을 나타냅니다.
+    // WebSecurityConfigurerAdapter 대신 SecurityFilterChain을 사용해 보안 설정을 정의합니다.
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // HTTP 헤더 설정
                 .headers(headers -> headers
                                 .addHeaderWriter((request, response) -> {
-                                    response.setHeader("X-XSS-Protection", "1; mode=block"); // XSS-Protection 헤더설정
+                                    // XSS(크로스 사이트 스크립팅) 공격 방지를 위한 헤더 추가
+                                    response.setHeader("X-XSS-Protection", "1; mode=block"); // XSS 보호 모드 활성화
                                 })
                 )
-                //.csrf(withDefaults())
-                .csrf(csrf -> csrf.disable())
+                // CSRF 보호 설정
+                //.csrf(withDefaults()) // 기본 CSRF 보호 활성화(주석 처리됨)
+                .csrf(csrf -> csrf.disable()) // CSRF 보호를 비활성화합니다. 필요에 따라 활성화해야 합니다.
+                // 세션 관리 설정
                 .sessionManagement(session -> session
-                                .invalidSessionUrl("/session-expired") // 세션만료시이동페이지
-                                .maximumSessions(1) // 사용자별세션최대수
-                                .maxSessionsPreventsLogin(true) // 동시세션제한
+                                .invalidSessionUrl("/session-expired") // 세션이 만료되었을 때 이동할 URL 설정
+                                .maximumSessions(-1) // 사용자가 가질 수 있는 최대 세션 수를 1로 제한
+                                .maxSessionsPreventsLogin(false) // 이미 로그인된 세션이 있으면 새로운 로그인을 차단
                 );
 
-                
-        return http.build(); // 필터체인을통해보안설정(HttpSecurity)을반환
+        // HttpSecurity 설정을 바탕으로 SecurityFilterChain 객체를 생성하여 반환
+        return http.build();
     }
 
-    @Bean // 암호화 설정
+    @Bean // 이 메서드가 Spring Bean으로 등록됨을 나타냅니다.
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // 비밀번호 암호화 저장
+        // PasswordEncoder 인터페이스의 구현체로 BCryptPasswordEncoder를 반환
+        // 비밀번호를 안전하게 암호화하기 위해 사용
+        return new BCryptPasswordEncoder();
     }
-
 }

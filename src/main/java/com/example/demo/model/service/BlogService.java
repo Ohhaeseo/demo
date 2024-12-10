@@ -50,13 +50,25 @@ public class BlogService {
     
     
     
-    public List<Board> findAll() { // 게시판 전체 목록 조회
-        return blogRepository.findAll();
+    public List<Board> findAll() { 
+        // 게시판 전체 목록 조회 메서드
+        // 데이터베이스에서 모든 게시글(Board)을 조회하여 반환합니다.
+        return blogRepository.findAll(); 
+        // blogRepository의 findAll() 메서드를 호출하여 
+        // 게시글 목록을 List<Board> 형태로 반환합니다.
     }
-
-    public Optional<Board> findById(Long id) { // 게시판 특정 글 조회
-        return blogRepository.findById(id);
+    
+    public Optional<Board> findById(Long id) { 
+        // 게시판 특정 글 조회 메서드
+        // 주어진 ID를 사용하여 특정 게시글(Board)을 데이터베이스에서 조회합니다.
+        // @param id - 조회할 게시글의 고유 ID
+        // @return Optional<Board> - 조회된 게시글이 존재하면 해당 게시글을 포함한 Optional 객체 반환,
+        // 없으면 비어 있는 Optional 객체 반환.
+        return blogRepository.findById(id); 
+        // blogRepository의 findById() 메서드를 호출하여 
+        // ID에 해당하는 게시글을 조회하고 Optional로 감쌉니다.
     }
+    
 
     public void update(Long id, AddArticleRequest request) {
         // 게시글 수정 메서드입니다.
