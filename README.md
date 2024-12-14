@@ -2,9 +2,10 @@
 
 # 오해서의 포트폴리오 웹 프로젝트 🚀
 
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.5.4-green.svg)](https://spring.io/projects/spring-boot)
-[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Java](https://img.shields.io/badge/Java-17-007396?logo=java)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7.0-brightgreen?logo=springboot)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?logo=mysql)
+![GitHub](https://img.shields.io/github/stars/Ohhaeseo/portfolio-web?style=social)
 
 > **나의 기술과 경험을 한눈에 보여줄 수 있는 포트폴리오 웹사이트 프로젝트입니다.**
 >
@@ -14,12 +15,17 @@
 
 ## 📌 프로젝트 소개
 
-이 프로젝트는 다음과 같은 기능을 제공합니다:
-- **개인 프로필**: 자기소개와 연락 정보.
-- **프로젝트 소개**: 내가 수행한 주요 프로젝트들을 나열하여 보여줍니다.
-- **스킬 리스트**: 내가 가진 기술 스택을 보기 좋게 정리.
-- **게시판**: 블로그 포스팅 또는 사용자 피드백을 받을 수 있는 게시판 기능.
-- **파일 업로드 및 관리**: 파일을 업로드하고 관리할 수 있는 시스템.
+# 🚀 Spring Boot Portfolio Project
+
+Spring Boot 기반으로 개발된 포트폴리오 웹사이트입니다. 이 프로젝트는 학습 및 실무 경험을 위한 완성형 포트폴리오 웹으로, 백엔드와 프론트엔드의 통합을 경험할 수 있습니다.
+
+- **주요 기술 스택**: Spring Boot, Thymeleaf, MySQL, HTML/CSS, Bootstrap
+- **주요 기능**:
+  - 사용자 로그인/로그아웃 및 세션 관리
+  - 게시판 CRUD (게시글 작성, 조회, 수정, 삭제)
+  - 페이징과 검색 기능
+  - 예외 처리 및 파일 업로드 기능
+  - 다중 사용자 세션 처리
 
 
 # 📘 프로젝트 진행 과정
