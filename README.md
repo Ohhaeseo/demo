@@ -135,6 +135,7 @@ Spring Boot 기반 포트폴리오 웹사이트 프로젝트의 진행 과정입
 
 **<2명 이상 로그인 코드 수정>**
 ![homework14_2](https://github.com/user-attachments/assets/eed038d4-8c0e-4a50-9055-1364ca36cbff)
+![homework14](https://github.com/user-attachments/assets/c6252565-bb87-40e8-9897-787928d9a629)
 
 ---
 
