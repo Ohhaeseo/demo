@@ -1,5 +1,27 @@
 # JAVA WEB PROGRAMING
 
+# 오해서의 포트폴리오 웹 프로젝트 🚀
+
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.5.4-green.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-17-orange.svg)](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+> **나의 기술과 경험을 한눈에 보여줄 수 있는 포트폴리오 웹사이트 프로젝트입니다.**
+>
+> Spring Boot를 기반으로 제작된 이 웹사이트는 나의 경력, 프로젝트, 스킬 등을 간편하게 공유할 수 있도록 설계되었습니다.
+
+---
+
+## 📌 프로젝트 소개
+
+이 프로젝트는 다음과 같은 기능을 제공합니다:
+- **개인 프로필**: 자기소개와 연락 정보.
+- **프로젝트 소개**: 내가 수행한 주요 프로젝트들을 나열하여 보여줍니다.
+- **스킬 리스트**: 내가 가진 기술 스택을 보기 좋게 정리.
+- **게시판**: 블로그 포스팅 또는 사용자 피드백을 받을 수 있는 게시판 기능.
+- **파일 업로드 및 관리**: 파일을 업로드하고 관리할 수 있는 시스템.
+
+
 ### 1주차 : 스프링 부트 개발환경, 테스트 완료!
 
 [index.html : 실행/수정 완료](https://github.com/Ohhaeseo)
